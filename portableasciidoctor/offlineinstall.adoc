@@ -1,0 +1,191 @@
+
+== Portable Asciidoctor
+
+What if your target computer is not connected to the internet ('standalone'), or you don't have administrator privelleges, or you want to run from a CD or USB ('portable')? 
+You can still run most of the applications, but some of them must be built on an internet connected computer first.
+
+These notes are a guide to getting the applications working in each situation, not detailed instructions.
+They are based on downloading to a Ubuntu 15 computer (with full privelleges), and installing on a standalone Windows 7 PC (with user privelleges only).
+Installation from other combinations should be similar.
+
+|====
+|Application |Build tools (internet computer) |Runtime dependencies |Standalone-admin |Standalone-user |Portable-USB |Portable-CD
+
+|{set:cellbgcolor:#FFFFFF}
+asciidoctor
+|-
+|Ruby
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES (JRuby)
+|{set:cellbgcolor:#00FF00}
+YES (JRuby)
+|{set:cellbgcolor:#FF0000}
+NO?
+
+|{set:cellbgcolor:#FFFFFF}
+asciidoctor-ant
+|JDK, Maven
+|JDK, Ant
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES?
+|{set:cellbgcolor:#00FF00}
+YES?
+
+|{set:cellbgcolor:#FFFFFF}
+asciidoctorj
+|-
+|JDK
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES?
+|{set:cellbgcolor:#00FF00}
+YES?
+
+|{set:cellbgcolor:#FFFFFF}
+asciidoclet
+|JDK, Maven
+|JDK
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES?
+|{set:cellbgcolor:#00FF00}
+YES?
+
+|{set:cellbgcolor:#FFFFFF}
+asciidoctor-pdf
+|Ruby
+|Ruby
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES (JRuby)
+|{set:cellbgcolor:#00FF00}
+YES (JRuby)
+|{set:cellbgcolor:#FF0000}
+NO?
+
+|{set:cellbgcolor:#FFFFFF}
+asciidoctor-fopub
+|JDK, Maven
+|-
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#00FF00}
+YES
+|{set:cellbgcolor:#FF0000}
+NO
+
+|====
+
+//NOTE: These notes are hints, not detailed instructions.
+//They are based on downloading to a Ubuntu 15 computer (with full privelleges), and installing on a standalone Windows 7 PC (with user privelleges only).
+//Installation from other combinations should be similar.
+
+//You will need the following software on each computer:
+
+//internet computer:: JDK, Ruby, Maven
+
+//standalone computer:: JDK, Ruby, Ant (only for asciidoctor-ant)
+
+=== Build tools
+
+Installation of the build tools (Ruby, Ant, JDK, and Maven) on the internet computer are not described here because they are already fully described in (link Ant link JDK link Maven).
+
+=== Runtime dependencies
+
+If Ruby is listed as a runtime dependency and it is not on the target computer, JRuby can be used instead (without admin install) but it needs a JVM.
+
+. Download jruby-{version}.zip (link).
+
+. Unzip it to {somewhere}.
+
+. Add +{somewhere}/jruby-{version}/bin+ to the path.
+
++jruby+ and +gem+ should now run from the command line.
+
+If Ant is listed as a runtine dependency, it can be installed anywhere by unzipping its distribution zip file.
+
+=== asciidoctor
+
+. Install Ruby on the standalone computer (see above).
+
+. Download the gem from https://rubygems.org/gems/asciidoctor.
+
+. Copy it to the standalone computer.
+
+. cd to the folder containing the gem.
+
+. Install it using: +gem install --force --local asciidoctor-{version}.gem+.
+
++asciidoctor+ should now run from the command line.
+
+=== asciidoctor-ant
+
+This is the simplest way to get asciidoctor running, especially if you already use Ant.
+However asciidoctor-ant only includes the main asciidoctor gem, and is often a version behind.
+If you want to use any of the other modules, you need to install the individual gems with a Ruby installation instead.
+
+To get the latest version of asciidoctor-ant:
+
+. Download the project (https://github.com/asciidoctor/asciidoclet).
+
+. Build it using Maven (+mvn package+).
+
+. Copy the +asciidoctor-ant-{version}.jar+ file from the 'target' folder to the standalone computer.
+
+. Use it as described in the project README.
+
+=== asciidoctorj
+
+Download the pre-built jar from Bintray and copy it to the standalone computer. 
+
+=== asciidoclet
+
+There is no pre-built version available, and the project does not build off-line. 
+
+. Download the project (https://github.com/asciidoctor/asciidoclet).
+
+. Build it using Maven (+mvn package+).
+
+. Copy the asciidoclet-{version}-all.jar in the 'target' folder to the standalone computer.
+
+=== asciidoctor-pdf
+
+This is a pre-built gem but it has lots of dependencies, so let +gem+ do the work of fetching them.
+
+. Install Ruby on the standalone computer (see above).
+
+. Install the gem on the internet computer following the instructions on the download page.
+Something like: +gem install asciidoctor-pdf -v 1.5.0.alpha.6 --pre+.
+
+. Locate your gem cache (On Ubuntu 15 look in +/var/lib/gems/2.3.0/cache+).
+
+. Copy the whole cache folder to somewhere on the standalone computer. 
+
+. cd to that folder.
+
+. Install the gem using something like: +gem install --force --local asciidoctor-pdf-1.5.0.alpha.6.gem+.
+
++asciidoctor-pdf+ should now run from the command line.
+  
+=== asciidoctor-fopub
+
+The application is portable, but the current version requires that all documents to be converted are in the asciidoctor-fopub folder.
+(Hopefully this restriction will disappear soon).
+
+Build it and convert a document as described in its README, then you can move and rename the whole folder (NOT just the dist) to any computer.
+

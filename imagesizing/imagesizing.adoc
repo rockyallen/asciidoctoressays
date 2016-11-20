@@ -1,0 +1,180 @@
+ifdef::html[]
+:not-sized:
+:twoinches: width='144'
+:full-width: width='100%'
+:half-width: width='50%'
+:half-size:
+:thumbnail: width='60'
+endif::[]
+ifdef::pdf[]
+:not-sized:
+:twoinches: pdfwidth='2in'
+:full-width: pdfwidth='100vw'
+:half-width: pdfwidth='50vw'
+:half-size: pdfwidth='50%'
+:thumbnail: pdfwidth='20mm'
+endif::[]
+ifdef::docbook[]
+:not-sized:
+:twoinches: width='50mm'
+:full-width: scaledwidth='100%'
+:half-width: scaledwidth='50%'
+:half-size: width='50%'
+:thumbnail: width='20mm'
+endif::[]
+== Sizing your image
+
+
+=== Basic
+
+The preferred way to set an image size that covers all output formats is:
+
+----
+image::flower.jpg[width="300",height="200",pdfwidth="100mm",scaledwidth="50%"]
+----
+
+height and width are for html. They are the size of the image file in pixels.
+They do not change the displayed image size, instead they are used by the browser to reserve space when rendering (see http://asciidoctor.org/docs/user-manual/#images).
+The image size for asciidoctor-html is controlled automatically by the default stylesheet, which shows the image at its natural size or reduces it to fit if it is too large for the current window.
+
++pdfwidth+ applies to asciidoctor-pdf only (see https://github.com/asciidoctor/asciidoctor-pdf#image-scaling).
+
++scaledwidth+ applies to asciidoctor-fopub only, and sizes the image as a percentage of the page width (margin to margin).
+
+=== Advanced
+
+You can size images in other ways, but the attributes you need depend on the backend:
+
+.Image sizing methods
+|====
+|Backend |Absolute |Relative to original image size |Relative to "page" width
+
+|asciidoctor (html)
+|width="120" BUG (also automatic scaled by stylesheet)
+|Not possible
+|width="80%" (also automatic scaled by stylesheet)
+
+|asciidoctor-pdf
+|pdfwidth="100mm" (or mm, cm, in, px, or pt) BUG
+|pdfwidth="80%" BUG
+|pdfwidth="60vw" BUG
+
+|asciidoctor-fopub (pdf)
+|width="100mm" (or mm, cm, in, em, pc or pt)
+|width="80%"
+|scaledwidth="80%"
+
+|====
+
+You can make a single source file suitable for all backends by defining attributes:
+
+----
+\ifdef::html[]
+:not-sized:
+:twoinches: width="144"
+:full-width: width="100%"
+:half-width: width="50%"
+:half-size:
+:thumbnail: width="60"
+\endif::[]
+\ifdef::pdf[]
+:not-sized:
+:twoinches: pdfwidth="2in"
+:full-width: pdfwidth="100vw"
+:half-width: pdfwidth="50vw"
+:half-size: pdfwidth="50%"
+:thumbnail: pdfwidth="20mm"
+\endif::[]
+\ifdef::docbook[]
+:not-sized:
+:twoinches: width="50mm"
+:full-width: scaledwidth="100%"
+:half-width: scaledwidth="50%"
+:half-size: width="50%"
+:thumbnail: width="20mm"
+\endif::[]
+----
+
+Then specify your images as:
+
+----
+image::image.jpg[title="Title", {half-size}]
+----
+
+and setting the appropriate attribute from the command line when yoy convert the document:
+
+----
+include::convert.sh[]
+----
+
+NOTE: The way image sizes are specified may be changing (http://discuss.asciidoctor.org/Unit-of-measure-for-image-dimensions-td3040.html#a3222). 
+Attributes are good way to future-proof your document.
+
+== Examples
+
+image::fox.jpg[title="not-sized - {not-sized}", {not-sized}]
+
+image::fox.jpg[title="twoinches - {twoinches}", {twoinches}]
+
+image::fox.jpg[title="half-size - {half-size}", {half-size}]
+
+image::fox.jpg[title="full-width - {full-width}", {full-width}]
+
+image::fox.jpg[title="half-width - {half-width}", {half-width}]
+
+image::fox.jpg[title="thumbnail - {thumbnail}", {thumbnail}]
+
+== Experiment
+
+Tested with:
+
+* asciidoctor 1.5.5
+
+* asciidoctor-pdf 1.5.0.alpha.6
+
+* asciidoctor-fopub SNAPSHOT 2016-11-20
+
+* Firefox 49.0.2
+
+* Ubuntu 15 Document Viewer
+
+=== asciidoctor html
+
+Raw comes out as native image size. (GOOD)
+
+Autoscaling applies if the image is too big to fit the window. (GOOD)
+
+Otherwise, always obeys width attribute (BUG - should be ignored)
+
+width% = fraction of screen width. (GOOD, but not allowed in html5)
+
+width is copied straight to the html width attribute.
+
+=== asciidoctor-pdf
+
+Raw is scaled to fit on the page (GOOD)
+
+pdfwidth is ignored. (BUG)
+
+scaledwidth is applied correctly. (GOOD? Not documented, but code seems to treat it as a fallback if pdfwidth is not defined)
+
+width% scales images (GOOD)
+
+width all other units get interpreted as ? (bit bigger than a pt) (BUG - should be implemented)
+
+=== asciidoc-fopub
+
+Raw is not resized - may exceed page width. (GOOD? Not documented)
+
+Responds to width and scaledwidth, width has priority. (GOOD? Not documented)
+
+width=50% is relative to image size. (GOOD? Not documented)
+
+scaledwidth=50% is relative to page width. (GOOD)
+
+width=60 becomes contentwidth=60
+
+height=40 becomes contentheight=40
+
+scaledwidth=50% becomes width=50%, scalefit=1
+
