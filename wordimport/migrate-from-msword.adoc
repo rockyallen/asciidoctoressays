@@ -14,7 +14,9 @@ Use this command line:
 
 then edit the output file to tidy it up.
 
-The conversions you can expect are shown in the table below (tested using MS Word 2010 and Windows Pandoc 1.17).
+The conversions you can expect are shown in the table below (tested using MS Word 2010 and Windows Pandoc 1.17). 
+
+NOTE: Get the latest version you can as it is constantly improving (https://github.com/jgm/pandoc).
 
 .Pandoc MS Word to AsciiDoc conversions
 [cols="<20,<20"]
@@ -139,6 +141,7 @@ If there are, use the Ant `nativetoascii` task to make them visible as \NNNN cod
 See https://github.com/rockyallen/asciidoctoressays for an Ant script that automates these steps.
 
 === Google Docs
+
 Google Docs can already upload and edit MS Word docx files.
 With this addon from Guillaume Grossetie: {url-google-asciidoc}[AsciiDoc Processor]
 you can copy and paste part or all of the document from Google Docs as AsciiDoc text. 
@@ -146,6 +149,7 @@ The features that it can handle seem to be slightly fewer than Pandoc, but expec
 The source for the addon is at {url-google-asciidoc-source}.
 
 === Plain Text
+
 This method is only useful for very small files, or if the other routes are not available.
 
 It keeps the text, and 'fixes' fields like auto-numbered lists and cross references.

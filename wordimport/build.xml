@@ -1,87 +1,91 @@
-<?xml verison=1.0 ?>
-<project name="wordimport">
+<?xml version="1.0" ?>
+<project name="wordimport" default="cleanup">
 
 <!--
 These fragments help to clean up asciidoc source produced by Pandoc.
 Make sure you have cleaned the Word document and saved as strict XML before converting it.
 -->
 
-<property name="infile" location="sample.docx"/>
+  <property name="infile" location="sample.docx"/>
 
-<property name="outfile" location="sample.adoc"/>
+  <property name="outfile" location="sample.adoc"/>
 
-<property name="pandoc" location="bin/pandoc.exe"/>
+  <property name="pandoc" location="C:/pandoc-1.18/pandoc.exe"/>
 
-<!--
-Extract image files:
+  <!--
+  Extract image files:
 
-TIP: docx is just a zip file with a docx file extension.
-The images are always in the same place.
+  TIP: docx is just a zip file with a docx file extension.
+  The images are always in the same place.
 
-Gets images from canvases as well, but not vector graphics
--->
+  Gets images from canvases as well, but not vector graphics
+  -->
 
-<target name="extract images to dist/images">
-  <unzip src="${infile}" dest="build"/>
-  <copy todir="dist/images">
-    <fileset dir="build/word/media"/>
-  </copy>
-</target>
+  <target name="extractimages" description="extract images to dist/images">
+    <mkdir dir="dist/images"/>
+    <unzip src="${infile}" dest="build"/>
+    <copy todir="dist/images">
+      <fileset dir="build/word/media"/>
+    </copy>
+  </target>
 
-<target name="pandoc" description="Run Pandoc over infile">
-<exec executable="pandoc">
-    <arg value="-f"/><arg value="docx"/>
-    <arg value="-t"/><arg value="asciidoc"/>  
-    <arg value="--wrap=none"/>
-    <arg value="--atx-headers"/>
-    <arg value="--normalize"/>
-    <arg value="-o"/><arg value="${outfile}"/>
-    <arg value="${infile}"/>
-  </exec>
-</target>
+  <target name="pandoc" description="Run Pandoc over infile">
+    <exec executable="${pandoc}">
+      <arg value="-f"/>
+      <arg value="docx"/>
+      <arg value="-t"/>
+      <arg value="asciidoc"/>  
+      <arg value="--wrap=none"/>
+      <arg value="--atx-headers"/>
+      <arg value="--normalize"/>
+      <arg value="-o"/>
+      <arg value="${outfile}"/>
+      <arg value="${infile}"/>
+    </exec>
+  </target>
 
-<!--
-Automate some of the editing steps (adjust the regexps to match your particular document):
--->
+  <!--
+  Automate some of the editing steps (adjust the regexps to match your particular document):
+  -->
 
-<target name="cleanup" description="cleanup after import" depends="pandoc,extractimages">
+  <target name="cleanup" description="cleanup after import" depends="pandoc,extractimages">
 
-<!-- Delete automatically inserted ids -->
-<replaceregexp
-    file="${outfile}" 
-    match="\[\[_.*]]"
-    replace=""
-    flags="g"/>
+    <!-- Delete automatically inserted ids -->
+    <replaceregexp
+      file="${outfile}" 
+      match="\[\[_.*]]"
+      replace=""
+      flags="g"/>
 
-<!-- Shorten table delimiters -->
-<replaceregexp
-    file="${outfile}"
-    match="\|==*"
-    replace="|===="
-    flags="g"/>
+    <!-- Shorten table delimiters -->
+    <replaceregexp
+      file="${outfile}"
+      match="\|==*"
+      replace="|===="
+      flags="g"/>
 
-<!-- 1 sentence per line. Be careful not to match lists. It will get confused by abbreviations, but there is no way around that. -->
-<replaceregexp
-    file="${outfile}"
-    match="(\w\w+)\.\s+(\w)"
-    replace="\1.${line.separator}\2"
-    flags="g"
-    byline="true"/>
+    <!-- 1 sentence per line. Be careful not to match lists. It will get confused by abbreviations, but there is no way around that. -->
+    <replaceregexp
+      file="${outfile}"
+      match="(\w\w+)\.\s+(\w)"
+      replace="\1.${line.separator}\2"
+      flags="g"
+      byline="true"/>
 
-<!-- Replace figure captions with id and title -->
-<replaceregexp
-    file="@{outfile}"
-    match="^Figure (\d?)*\s?(.*)"
-    replace="[[fig-\1]]${line.separator}.\2${line.separator}"
-    byline="true"/>
+    <!-- Replace figure captions with id and title -->
+    <replaceregexp
+      file="@{outfile}"
+      match="^Figure (\d?)*\s?(.*)"
+      replace="[[fig-\1]]${line.separator}.\2${line.separator}"
+      byline="true"/>
 
-<!-- Replace references to figures with asciidoc xref -->
-<replaceregexp
-    file="@{outfile}"
-    match="Figure (\d?)"
-    replace="&lt;&lt;fig-\1&gt;&gt;"
-    flags="g"/>
-</target>
+    <!-- Replace references to figures with asciidoc xref -->
+    <replaceregexp
+      file="@{outfile}"
+      match="Figure (\d?)"
+      replace="&lt;&lt;fig-\1&gt;&gt;"
+      flags="g"/>
+  </target>
 </project>
 
 
