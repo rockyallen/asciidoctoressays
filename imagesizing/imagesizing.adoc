@@ -1,5 +1,4 @@
 ifdef::html[]
-:not-sized:
 :twoinches: width='144'
 :full-width: width='100%'
 :half-width: width='50%'
@@ -7,7 +6,6 @@ ifdef::html[]
 :thumbnail: width='60'
 endif::[]
 ifdef::pdf[]
-:not-sized:
 :twoinches: pdfwidth='2in'
 :full-width: pdfwidth='100vw'
 :half-width: pdfwidth='50vw'
@@ -15,19 +13,16 @@ ifdef::pdf[]
 :thumbnail: pdfwidth='20mm'
 endif::[]
 ifdef::docbook[]
-:not-sized:
 :twoinches: width='50mm'
 :full-width: scaledwidth='100%'
 :half-width: scaledwidth='50%'
 :half-size: width='50%'
 :thumbnail: width='20mm'
 endif::[]
-== Sizing your image
+= Sizing your image
 
 
-=== Basic
-
-The preferred way to set an image size that covers all output formats is:
+The preferred way to set an image size for all backends is:
 
 ----
 image::flower.jpg[width="300",height="200",pdfwidth="100mm",scaledwidth="50%"]
@@ -39,38 +34,33 @@ The image size for asciidoctor-html is controlled automatically by the default s
 
 +pdfwidth+ applies to asciidoctor-pdf only (see https://github.com/asciidoctor/asciidoctor-pdf#image-scaling).
 
-+scaledwidth+ applies to asciidoctor-fopub only, and sizes the image as a percentage of the page width (margin to margin).
++scaledwidth+ applies to asciidoctor-fopub, and sizes the image as a percentage of the page width (margin to margin).
 
-=== Advanced
-
-You can size images in other ways, but the attributes you need depend on the backend:
-
-.Image sizing methods
+.Summary of image sizing attributes
 |====
 |Backend |Absolute |Relative to original image size |Relative to "page" width
 
 |asciidoctor (html)
-|width="120" BUG (also automatic scaled by stylesheet)
+|width="120" BUG? Works in Firefox, but HTML spec says shouldn't
 |Not possible
-|width="80%" (also automatic scaled by stylesheet)
+|width="50%" (html 4 only)
 
 |asciidoctor-pdf
-|pdfwidth="100mm" (or mm, cm, in, px, or pt) BUG
-|pdfwidth="80%" BUG
-|pdfwidth="60vw" BUG
+|pdfwidth="100mm" (or mm, cm, in, px, or pt)
+|pdfwidth="80%"
+|pdfwidth="50vw"
 
 |asciidoctor-fopub (pdf)
-|width="100mm" (or mm, cm, in, em, pc or pt)
+|width="100mm" (or mm, cm, in, em or pt)
 |width="80%"
-|scaledwidth="80%"
+|scaledwidth="50%"
 
 |====
 
-You can make a single source file suitable for all backends by defining attributes:
+You can use attributes to make a document suitable for all backends:
 
 ----
 \ifdef::html[]
-:not-sized:
 :twoinches: width="144"
 :full-width: width="100%"
 :half-width: width="50%"
@@ -78,7 +68,6 @@ You can make a single source file suitable for all backends by defining attribut
 :thumbnail: width="60"
 \endif::[]
 \ifdef::pdf[]
-:not-sized:
 :twoinches: pdfwidth="2in"
 :full-width: pdfwidth="100vw"
 :half-width: pdfwidth="50vw"
@@ -86,7 +75,6 @@ You can make a single source file suitable for all backends by defining attribut
 :thumbnail: pdfwidth="20mm"
 \endif::[]
 \ifdef::docbook[]
-:not-sized:
 :twoinches: width="50mm"
 :full-width: scaledwidth="100%"
 :half-width: scaledwidth="50%"
@@ -98,10 +86,10 @@ You can make a single source file suitable for all backends by defining attribut
 Then specify your images as:
 
 ----
-image::image.jpg[title="Title", {half-size}]
+image::image.jpg[{half-size}]
 ----
 
-and setting the appropriate attribute from the command line when yoy convert the document:
+and set the appropriate attribute from the command line when you convert the document:
 
 ----
 include::convert.sh[]
@@ -110,9 +98,10 @@ include::convert.sh[]
 NOTE: The way image sizes are specified may be changing (http://discuss.asciidoctor.org/Unit-of-measure-for-image-dimensions-td3040.html#a3222). 
 Attributes are good way to future-proof your document.
 
+////
 == Examples
 
-image::fox.jpg[title="not-sized - {not-sized}", {not-sized}]
+image::fox.jpg[title="not-sized - {not-sized}"]
 
 image::fox.jpg[title="twoinches - {twoinches}", {twoinches}]
 
@@ -123,6 +112,7 @@ image::fox.jpg[title="full-width - {full-width}", {full-width}]
 image::fox.jpg[title="half-width - {half-width}", {half-width}]
 
 image::fox.jpg[title="thumbnail - {thumbnail}", {thumbnail}]
+
 
 == Experiment
 
@@ -177,4 +167,4 @@ width=60 becomes contentwidth=60
 height=40 becomes contentheight=40
 
 scaledwidth=50% becomes width=50%, scalefit=1
-
+////
