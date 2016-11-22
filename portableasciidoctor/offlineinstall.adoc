@@ -103,11 +103,9 @@ NO (5)
 
 (5) The application is portable, but the current version requires that all documents to be converted are in the asciidoctor-fopub folder, so it cannot be run from read-only media.
 
-== Build tools
+== Build a distribution CD
 
-Installation of the build tools (Ruby, JDK, and Maven) on the internet computer are not described here because they are already fully described elsewhere.
-
-== Build distribution CD
+NOTE: Installation of the build tools (Ruby, JDK, and Maven) on the internet computer are not described here because they are already fully described elsewhere.
 
 JRuby::
   Download JRuby.zip from http://jruby.org/
