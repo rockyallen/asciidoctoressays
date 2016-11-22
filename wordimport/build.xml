@@ -74,14 +74,14 @@ Make sure you have cleaned the Word document and saved as strict XML before conv
 
     <!-- Replace figure captions with id and title -->
     <replaceregexp
-      file="@{outfile}"
+      file="${outfile}"
       match="^Figure (\d?)*\s?(.*)"
       replace="[[fig-\1]]${line.separator}.\2${line.separator}"
       byline="true"/>
 
     <!-- Replace references to figures with asciidoc xref -->
     <replaceregexp
-      file="@{outfile}"
+      file="${outfile}"
       match="Figure (\d?)"
       replace="&lt;&lt;fig-\1&gt;&gt;"
       flags="g"/>
