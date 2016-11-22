@@ -1,5 +1,5 @@
 
-== Portable Asciidoctor
+= Portable Asciidoctor
 
 What if your target computer is not connected to the internet ('standalone'), or you don't have administrator privelleges, or you want to run from a CD or USB ('portable')? 
 You can still run most of the applications, but some of them must be built on an internet connected computer first.
@@ -9,12 +9,12 @@ They are based on downloading to a Ubuntu 15 computer (with full privelleges), a
 Installation from other combinations should be similar.
 
 |====
-|Application |Build tools (internet computer) |Runtime dependencies |Standalone-admin |Standalone-user |Portable-R/W (6) |Portable-R/O (7)
+|Application |Build tools |Runtime dependencies |Standalone-admin |Standalone-user |Portable-R/W (1) |Portable-R/O (2)
 
 |{set:cellbgcolor:#FFFFFF}
-asciidoctor (1)
+asciidoctor
 |-
-|Ruby (8)
+|Ruby (3)
 |{set:cellbgcolor:#00FF00}
 YES
 |{set:cellbgcolor:#00FF00}
@@ -25,7 +25,7 @@ YES (JRuby)
 YES (JRuby)
 
 |{set:cellbgcolor:#FFFFFF}
-asciidoctor-ant (2)
+asciidoctor-ant
 |JDK, Maven
 |JDK, Ant
 |{set:cellbgcolor:#00FF00}
@@ -51,7 +51,7 @@ YES?
 YES?
 
 |{set:cellbgcolor:#FFFFFF}
-asciidoclet (3)
+asciidoclet
 |JDK, Maven
 |JDK
 |{set:cellbgcolor:#00FF00}
@@ -65,8 +65,8 @@ YES?
 
 |{set:cellbgcolor:#FFFFFF}
 asciidoctor-pdf
+|Ruby (3)
 |Ruby (4)
-|Ruby (8)
 |{set:cellbgcolor:#00FF00}
 YES
 |{set:cellbgcolor:#00FF00}
@@ -93,28 +93,21 @@ NO (5)
 
 *NOTES*
 
-(1) Prebuilt gem.
+(1) Eg USB drive.
 
-(2) This is the simplest way to get asciidoctor running, especially if you already use Ant.
-However asciidoctor-ant only includes the main asciidoctor gem, and is often a version behind.
+(2) Eg CD or read-only network drive.
 
-(3) There is no pre-built version available, and the project does not build off-line.
+(3) If Ruby is not on the target computer, JRuby can be used instead (without admin install) but it needs a JVM.
 
 (4) Prebuilt gem, but Ruby is used to collect dependencies.
 
 (5) The application is portable, but the current version requires that all documents to be converted are in the asciidoctor-fopub folder, so it cannot be run from read-only media.
 
-(6) Eg USB drive.
-
-(7) Eg CD or read-only network drive.
-
-(8) If Ruby is not on the target computer, JRuby can be used instead (without admin install) but it needs a JVM.
-
-=== Build tools
+== Build tools
 
 Installation of the build tools (Ruby, JDK, and Maven) on the internet computer are not described here because they are already fully described elsewhere.
 
-=== Build distribution CD
+== Build distribution CD
 
 JRuby::
   Download JRuby.zip from http://jruby.org/
@@ -128,7 +121,11 @@ Asciidoctor::
 // tested
 
 asciidoctor-ant::
- To get the latest version of asciidoctor-ant:
+ This is the simplest way to get asciidoctor running, especially if you already use Ant.
+However asciidoctor-ant only includes the main asciidoctor gem, and is often a version behind.
+There is no pre-built version available, and the project does not build off-line.
++
+To build the latest version:
 +
 . Download the project (https://github.com/asciidoctor/asciidoclet).
 +
@@ -174,7 +171,7 @@ NOTE: The application does not download fully until the first document is conver
 +
 . Copy the whole folder (NOT just 'target').
 
-=== Install on standalone computer (admin)
+== Install on standalone computer (admin)
 
 // not tested
 
@@ -188,7 +185,7 @@ NOTE: The application does not download fully until the first document is conver
 
 . Copy the other folders/jars.
 
-=== Install on standalone computer (user)
+== Install on standalone computer (user)
 
 // tested (although I am only guessing about the admin rights - we do not have ruby on our network to try it.
 
@@ -201,7 +198,7 @@ If this happens, or it does not have Ruby, you can use JRuby instead:
 
 +jruby+ and +gem+ should now run from the command line.
 
-=== Create portable distribution (R/W)
+== Create portable distribution (R/W)
 
 // not tested
 
@@ -218,10 +215,10 @@ The applications will not be available on the command line, but they will work u
 etc.
 ====
 
-=== Create portable distribution (R/O)
+== Create portable distribution (R/O)
 
 // not tested
 
-Follow the intsructions for portable R/W as above.
+Follow the intstructions for portable R/W as above.
 The only application that will not work is asciidoctor-fopub.
 
