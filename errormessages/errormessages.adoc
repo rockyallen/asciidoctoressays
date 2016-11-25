@@ -1,0 +1,37 @@
+
+[appendix]
+== Error Messages
+
+// use <source> for an asciidoc source file with line number
+// use <file> for an arbitrary file
+// use <x> for anything else
+
+The most common error and warning messages are listed alphabetically below.
+
+[NOTE]
+====
+These messages are produced by asciidoctor and asciidoctor-ant.
+If you are using asciidoctorj or the asciidoctor API, you may see different errors.
+====
+
+.Common Error Messages
+[options="header,breakable",cols="<60,<30,<30"]
+|====
+|Message |Cause |See also
+
+|asciidoctor: FAILED: input file <file> missing or cannot be read
+|Misspelled filename?
+|<<using-the-command-line-interface>>
+
+|asciidoctor: FAILED: missing converter for backend '<x>'. Processing aborted. (RuntimeError)
+|
+|Built-in backends: <<cli-options>>
+
+Custom backends: ?
+
+|asciidoctor: WARNING: <source> include file not found: <file>
+|
+|<<include-directive-2>>
+
+|====
+

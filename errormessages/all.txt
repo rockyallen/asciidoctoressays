@@ -1,0 +1,108 @@
+asciidoctor-master/lib/asciidoctor/cli/options.rb: $stderr.puts "asciidoctor: WARNING: extra arguments detected (unparsed arguments: #{args.map{|a| "'#{a}'"} * ', '}) or incorrect usage of stdin"
+asciidoctor-master/lib/asciidoctor/cli/options.rb:                  $stderr.puts %(asciidoctor: FAILED: input file #{file} missing or cannot be read)
+asciidoctor-master/lib/asciidoctor/cli/options.rb:              $stderr.puts %(asciidoctor: FAILED: input path #{file} is a #{(::File.stat file).ftype}, not a file)
+asciidoctor-master/lib/asciidoctor/cli/options.rb:              $stderr.puts %(asciidoctor: FAILED: input file #{file} missing or cannot be read)
+asciidoctor-master/lib/asciidoctor/cli/options.rb:            $stderr.puts 'asciidoctor: FAILED: \'tilt\' could not be loaded'
+asciidoctor-master/lib/asciidoctor/cli/options.rb:            $stderr.puts '  You must have the tilt gem installed (gem install tilt) to use custom backend templates'
+asciidoctor-master/lib/asciidoctor/cli/options.rb:            $stderr.puts '  Use --trace for backtrace'
+asciidoctor-master/lib/asciidoctor/cli/options.rb:              $stderr.puts %(asciidoctor: FAILED: '#{path}' could not be loaded)
+asciidoctor-master/lib/asciidoctor/cli/options.rb:              $stderr.puts '  Use --trace for backtrace'
+asciidoctor-master/lib/asciidoctor/cli/options.rb:        $stderr.puts %(asciidoctor: option #{$!.message})
+asciidoctor-master/lib/asciidoctor/cli/options.rb:        $stderr.puts %(asciidoctor: #{$!.message})
+
+asciidoctor-master/lib/asciidoctor/document.rb:      fail %(asciidoctor: FAILED: missing converter for backend '#{backend}'. Processing aborted.)
+asciidoctor-master/lib/asciidoctor/helpers.rb:        fail %(asciidoctor: FAILED: required gem '#{gem_name}' is not installed. Processing aborted.)
+asciidoctor-master/lib/asciidoctor/helpers.rb:        fail %(asciidoctor: FAILED: #{e.message.chomp '.'}. Processing aborted.)
+
+asciidoctor-master/test/reader_test.rb:            raise 'TestIncludeHandler should not have been invoked'
+asciidoctor-master/lib/asciidoctor.rb:        raise ::IOError, %(input file and output file cannot be the same: #{outfile})
+asciidoctor-master/lib/asciidoctor.rb:          raise ::IOError, %(target directory does not exist: #{to_dir})
+asciidoctor-master/lib/asciidoctor/path_resolver.rb:        raise ::SecurityError, %(Jail is not an absolute path: #{jail})
+asciidoctor-master/lib/asciidoctor/path_resolver.rb:        raise ::SecurityError, %(#{opts[:target_name] || 'Start path'} #{start} is outside of jail: #{jail} (disallowed in safe mode))
+asciidoctor-master/lib/asciidoctor/path_resolver.rb:            raise ::SecurityError, %(#{opts[:target_name] || 'path'} #{target} refers to location outside jail: #{jail} (disallowed in safe mode))
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:    raise ::NotImplementedError
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:    raise ::NotImplementedError
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:  # raises a SecurityError if a jail is specified and the resolved path is
+asciidoctor-master/lib/asciidoctor/parser.rb:    raise 'Au contraire, mon frere. No lexer instances will be running around.'
+asciidoctor-master/lib/asciidoctor/parser.rb:            raise %(Unsupported block type #{block_context} at #{reader.line_info})
+asciidoctor-master/lib/asciidoctor/table.rb:        raise %(Illegal table format: #{@format})
+asciidoctor-master/lib/asciidoctor/extensions.rb:      raise ::NotImplementedError
+asciidoctor-master/lib/asciidoctor/extensions.rb:        raise ::NotImplementedError
+asciidoctor-master/lib/asciidoctor/extensions.rb:          raise ::ArgumentError.new %(No block specified to process #{kind_name} extension at #{block.source_location})
+asciidoctor-master/lib/asciidoctor/extensions.rb:            raise ::ArgumentError.new %(Invalid type for #{kind_name} extension: #{processor})
+asciidoctor-master/lib/asciidoctor/extensions.rb:          raise ::ArgumentError.new %(Invalid arguments specified for registering #{kind_name} extension: #{args})
+asciidoctor-master/lib/asciidoctor/extensions.rb:          raise ::ArgumentError.new %(No name specified for #{kind_name} extension at #{block.source_location})
+asciidoctor-master/lib/asciidoctor/extensions.rb:          raise ::NoMethodError.new %(No block specified to process #{kind_name} extension at #{block.source_location})
+asciidoctor-master/lib/asciidoctor/extensions.rb:            raise ::ArgumentError.new %(Class specified for #{kind_name} extension does not inherit from #{kind_class}: #{processor})
+asciidoctor-master/lib/asciidoctor/extensions.rb:            raise ::ArgumentError.new %(No name specified for #{kind_name} extension: #{processor})
+asciidoctor-master/lib/asciidoctor/extensions.rb:            raise ::ArgumentError.new %(No name specified for #{kind_name} extension: #{processor})
+asciidoctor-master/lib/asciidoctor/extensions.rb:          raise ::ArgumentError.new %(Invalid arguments specified for registering #{kind_name} extension: #{args})
+asciidoctor-master/lib/asciidoctor/extensions.rb:        raise ::ArgumentError.new %(Extension group to register not specified)
+asciidoctor-master/lib/asciidoctor/extensions.rb:        raise ::ArgumentError.new %(Wrong number of arguments (#{argc} for 1..2))
+asciidoctor-master/lib/asciidoctor/extensions.rb:          raise %(Could not resolve class for name: #{qualified_name})
+asciidoctor-master/lib/asciidoctor/cli/options.rb:            raise $! if self[:trace]
+asciidoctor-master/lib/asciidoctor/cli/options.rb:              raise $! if self[:trace]
+asciidoctor-master/lib/asciidoctor/cli/invoker.rb:            raise e
+asciidoctor-master/lib/asciidoctor/converter.rb:        raise ::ArgumentError, %(Cannot determine backend for converter: #{self.class}) unless @backend
+asciidoctor-master/lib/asciidoctor/converter.rb:      raise ::NotImplementedError
+asciidoctor-master/lib/asciidoctor/converter/manpage.rb:        raise 'asciidoctor: ERROR: doctype must be set to manpage when using manpage backend'
+asciidoctor-master/lib/asciidoctor/converter/composite.rb:      raise %(Could not find a converter to handle transform: #{transform})
+asciidoctor-master/lib/asciidoctor/converter/template.rb:        raise %(Could not find a custom template to handle transform: #{template_name})
+asciidoctor-master/lib/asciidoctor/converter/template.rb:        raise ::ArgumentError, %(Unknown ERB implementation: #{name})
+
+asciidoctor-master/lib/asciidoctor/path_resolver.rb:            warn %(asciidoctor: WARNING: #{opts[:target_name] || 'path'} has illegal reference to ancestor of jail, auto-recovering)
+asciidoctor-master/lib/asciidoctor/reader.rb:          warn %(asciidoctor: ERROR: #{line_info}: mismatched macro: endif::#{target}[], expected endif::#{pair[:target]}[])
+asciidoctor-master/lib/asciidoctor/reader.rb:        warn %(asciidoctor: ERROR: #{line_info}: unmatched macro: endif::#{target}[])
+asciidoctor-master/lib/asciidoctor/reader.rb:        warn %(asciidoctor: ERROR: #{line_info}: maximum include depth of #{@maxdepth[:rel]} exceeded)
+asciidoctor-master/lib/asciidoctor/reader.rb:          warn %(asciidoctor: WARNING: #{line_info}: include file not found: #{include_file})
+asciidoctor-master/lib/asciidoctor/reader.rb:            warn %(asciidoctor: WARNING: #{line_info}: include #{target_type} not readable: #{include_file})
+asciidoctor-master/lib/asciidoctor/reader.rb:            warn %(asciidoctor: WARNING: #{line_info}: include #{target_type} not readable: #{include_file})
+asciidoctor-master/lib/asciidoctor/reader.rb:            warn %(asciidoctor: WARNING: #{line_info}: tag#{missing_tags.size > 1 ? 's' : nil} '#{missing_tags * ','}' not found in include #{target_type}: #{include_file})
+asciidoctor-master/lib/asciidoctor/reader.rb:          warn %(asciidoctor: WARNING: #{line_info}: include #{target_type} not readable: #{include_file})
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:      warn %(asciidoctor: WARNING: image to embed not found or not readable: #{image_path})
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:      warn %(asciidoctor: WARNING: could not retrieve image data from URI: #{image_uri})
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:          warn %(asciidoctor: WARNING: could not retrieve contents of #{opts[:label] || 'asset'} at URI: #{target}) if opts.fetch :warn_on_failure, true
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:        warn %(asciidoctor: WARNING: cannot retrieve contents of #{opts[:label] || 'asset'} at URI: #{target} (allow-uri-read attribute not enabled)) if opts.fetch :warn_on_failure, true
+asciidoctor-master/lib/asciidoctor/abstract_node.rb:      warn %(asciidoctor: WARNING: file does not exist or cannot be read: #{path}) if opts[:warn_on_failure]
+asciidoctor-master/lib/asciidoctor/parser.rb:      warn %(asciidoctor: ERROR: #{reader.prev_line_info}: malformed manpage title)
+asciidoctor-master/lib/asciidoctor/parser.rb:          warn %(asciidoctor: ERROR: #{reader.prev_line_info}: malformed name section body)
+asciidoctor-master/lib/asciidoctor/parser.rb:        warn %(asciidoctor: ERROR: #{reader.prev_line_info}: name section title must be at level 1)
+asciidoctor-master/lib/asciidoctor/parser.rb:      warn %(asciidoctor: ERROR: #{reader.prev_line_info}: name section expected)
+asciidoctor-master/lib/asciidoctor/parser.rb:            warn %(asciidoctor: ERROR: #{reader.line_info}: only book doctypes can contain level 0 sections)
+asciidoctor-master/lib/asciidoctor/parser.rb:            warn %(asciidoctor: WARNING: #{reader.line_info}: section title out of sequence: ) +
+asciidoctor-master/lib/asciidoctor/parser.rb:            warn %(asciidoctor: ERROR: #{reader.line_info}: only book doctypes can contain level 0 sections)
+asciidoctor-master/lib/asciidoctor/parser.rb:                warn %(asciidoctor: ERROR: #{block_line_info}: illegal block content outside of partintro block)
+asciidoctor-master/lib/asciidoctor/parser.rb:        warn %(asciidoctor: ERROR: #{reader.line_info}: invalid part, must have at least one section (e.g., chapter, appendix, etc.))
+asciidoctor-master/lib/asciidoctor/parser.rb:            warn %(asciidoctor: WARNING: #{reader.prev_line_info}: invalid style for #{block_context} block: #{style})
+asciidoctor-master/lib/asciidoctor/parser.rb:                warn %(asciidoctor: WARNING: #{reader.path}: line #{reader.lineno - 2}: callout list item index: expected #{expected_index} got #{match[1]})
+asciidoctor-master/lib/asciidoctor/parser.rb:                  warn %(asciidoctor: WARNING: #{reader.path}: line #{reader.lineno - 2}: no callouts refer to list item #{block.items.size})
+asciidoctor-master/lib/asciidoctor/parser.rb:              warn %(asciidoctor: WARNING: #{reader.prev_line_info}: invalid style for paragraph: #{style})
+asciidoctor-master/lib/asciidoctor/parser.rb:    #warn "BUFFER[#{list_type},#{sibling_trait}]>#{buffer * EOL}<BUFFER"
+asciidoctor-master/lib/asciidoctor/parser.rb:    #warn "BUFFER[#{list_type},#{sibling_trait}]>#{buffer.inspect}<BUFFER"
+asciidoctor-master/lib/asciidoctor/parser.rb:      warn %(asciidoctor: WARNING: #{reader.line_info}: list item index: expected #{expected}, got #{actual})
+asciidoctor-master/lib/asciidoctor/parser.rb:            warn %(asciidoctor: WARNING:#{reader.nil? ? nil : " #{reader.prev_line_info}:"} invalid empty #{type} detected in style attribute)
+asciidoctor-master/lib/asciidoctor/parser.rb:              warn %(asciidoctor: WARNING:#{reader.nil? ? nil : " #{reader.prev_line_info}:"} multiple ids detected in style attribute)
+asciidoctor-master/lib/asciidoctor/block.rb:      warn %(Unknown content model '#{@content_model}' for block: #{to_s}) unless @content_model == :empty
+asciidoctor-master/lib/asciidoctor/document.rb:        #warn 'asciidoctor: WARNING: setting base_dir is recommended when working with string documents' unless nested?
+asciidoctor-master/lib/asciidoctor/table.rb:        warn %(asciidoctor: ERROR: #{@last_cursor.line_info}: table missing leading separator, recovering automatically)
+asciidoctor-master/lib/asciidoctor/table.rb:          warn %(asciidoctor: ERROR: #{@last_cursor.line_info}: dropping cell because it exceeds specified number of columns)
+asciidoctor-master/lib/asciidoctor/helpers.rb:        warn %(asciidoctor: WARNING: optional gem '#{gem_name}' is not installed. Functionality disabled.)
+asciidoctor-master/lib/asciidoctor/helpers.rb:        warn %(asciidoctor: WARNING: #{e.message.chomp '.'}. Functionality disabled.)
+asciidoctor-master/lib/asciidoctor/substitutors.rb:        warn %(asciidoctor: WARNING: unknown substitution type #{type})
+asciidoctor-master/lib/asciidoctor/substitutors.rb:            warn %(asciidoctor: WARNING: illegal attribute directive: #{m[3]})
+asciidoctor-master/lib/asciidoctor/substitutors.rb:            warn %(asciidoctor: WARNING: dropping line containing reference to missing attribute: #{key})
+asciidoctor-master/lib/asciidoctor/substitutors.rb:          when 'warn'
+asciidoctor-master/lib/asciidoctor/substitutors.rb:            warn %(asciidoctor: WARNING: skipping reference to missing attribute: #{key})
+asciidoctor-master/lib/asciidoctor/substitutors.rb:      warn %(asciidoctor: WARNING: invalid substitution type#{invalid.size > 1 ? 's' : ''}#{subject ? ' for ' : nil}#{subject}: #{invalid * ', '})
+asciidoctor-master/lib/asciidoctor/converter/html5.rb:          warn 'asciidoctor: WARNING: abstract block cannot be used in a document without a title when doctype is book. Excluding block content.'
+asciidoctor-master/lib/asciidoctor/converter/html5.rb:        warn 'asciidoctor: ERROR: partintro block can only be used when doctype is book and it\'s a child of a book part. Excluding block content.'
+asciidoctor-master/lib/asciidoctor/converter/html5.rb:        warn %(asciidoctor: WARNING: unknown anchor type: #{node.type.inspect})
+asciidoctor-master/lib/asciidoctor/converter/docbook5.rb:          warn 'asciidoctor: WARNING: abstract block cannot be used in a document without a title when doctype is book. Excluding block content.'
+asciidoctor-master/lib/asciidoctor/converter/docbook5.rb:          warn 'asciidoctor: ERROR: partintro block can only be used when doctype is book and it\'s a child of a part section. Excluding block content.'
+asciidoctor-master/lib/asciidoctor/converter/docbook5.rb:      warn 'asciidoctor: WARNING: tables must have at least one body row' unless has_body
+asciidoctor-master/lib/asciidoctor/converter/docbook5.rb:        warn %(asciidoctor: WARNING: unknown anchor type: #{node.type.inspect})
+asciidoctor-master/lib/asciidoctor/converter/manpage.rb:      warn %(asciidoctor: WARNING: converter missing for #{name || node.node_name} node in manpage backend)
+asciidoctor-master/lib/asciidoctor/converter/manpage.rb:        warn %(asciidoctor: WARNING: unknown anchor type: #{node.type.inspect})
+asciidoctor-master/lib/asciidoctor/converter/factory.rb:            warn 'asciidoctor: WARNING: gem \'thread_safe\' is not installed. This gem is recommended when registering custom converters.'
+asciidoctor-master/lib/asciidoctor/converter/template.rb:      warn 'asciidoctor: WARNING: gem \'thread_safe\' is not installed. This gem is recommended when using custom backend templates.'
+
